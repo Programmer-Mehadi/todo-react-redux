@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddTodo = () => {
+  const data = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+
   const [error, setError] = useState({
     todoText: false,
     todoDate: false,
@@ -15,6 +20,7 @@ const AddTodo = () => {
       id: Math.random().toString().slice(3, 10),
       todoText,
       todoDate,
+      status: "Incomplete",
     };
     let newError = {};
     if (newTodoData?.todoText === "") {
@@ -24,6 +30,13 @@ const AddTodo = () => {
       newError = { ...newError, todoDate: true };
     }
     setError(newError);
+
+    if (newTodoData.todoText !== "" && newTodoData.todoDate !== "") {
+      dispatch({
+        type: "ADD_TODO",
+        payload: newTodoData,
+      });
+    }
   };
 
   return (
