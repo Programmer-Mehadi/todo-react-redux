@@ -1,18 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AddTodo = () => {
+  const [error, setError] = useState({
+    todoText: false,
+    todoDate: false,
+  });
+  const handleAddTodoSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const todoText = form.todoInput.value;
+    const todoDate = form.todoDate.value;
+
+    const newTodoData = {
+      id: Math.random().toString().slice(3, 10),
+      todoText,
+      todoDate,
+    };
+    let newError = {};
+    if (newTodoData?.todoText === "") {
+      newError = { todoText: true, todoDate: false };
+    }
+    if (newTodoData?.todoDate === "") {
+      newError = { ...newError, todoDate: true };
+    }
+    setError(newError);
+  };
+
   return (
     <section className="py-5">
-      <form className="bg-green-100 w-full max-w-[800px] mx-auto border-2 shadow-md rounded-md p-8 grid grid-cols-1 gap-4 justify-between">
+      <form
+        className="bg-green-100 w-full max-w-[800px] mx-auto border-2 shadow-md rounded-md p-8 grid grid-cols-1 gap-4 justify-between"
+        onSubmit={handleAddTodoSubmit}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             type="text"
             placeholder="Type here..."
-            className="input input-bordered"
+            className={`${
+              error?.todoText && "border-rose-700"
+            } input input-bordered`}
+            name="todoInput"
           />
-          <input type="date" className="input input-bordered" />
+          <input
+            name="todoDate"
+            type="date"
+            className={`${
+              error?.todoDate && "border-rose-700"
+            } input input-bordered`}
+          />
         </div>
-        <button className="btn btn-success rounded-[5px]">Add</button>
+        <button type="submit" className="btn btn-success rounded-[5px]">
+          Add
+        </button>
       </form>
     </section>
   );
