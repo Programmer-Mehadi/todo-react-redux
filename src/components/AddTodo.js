@@ -36,6 +36,7 @@ const AddTodo = () => {
         type: "ADD_TODO",
         payload: newTodoData,
       });
+      form.reset();
     }
   };
 

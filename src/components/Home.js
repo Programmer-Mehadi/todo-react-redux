@@ -13,7 +13,7 @@ const Home = () => {
         </h2>
       </header>
       <AddTodo></AddTodo>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[800px] mx-auto">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[1400px] mx-auto">
         {/* incomplete todo */}
         <IncompleteTodo></IncompleteTodo>
         {/* completed todo */}

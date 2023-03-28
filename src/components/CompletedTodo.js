@@ -5,11 +5,11 @@ const CompletedTodo = () => {
   const data = useSelector((state) => state.completedList);
   const dispatch = useDispatch();
   return (
-    <section className="text-slate-800 bg-white rounded-md">
+    <section className="text-slate-800 bg-white rounded-md h-fit">
       <h2 className="font-bold text-xl bg-green-800 rounded-t-md p-5 text-white">
         Completed Todo
       </h2>
-      <div className="overflow-auto">
+      <div className="overflow-auto max-h-[500px]">
         <table className="table w-[98%] mx-auto my-5">
           <thead>
             <tr>
