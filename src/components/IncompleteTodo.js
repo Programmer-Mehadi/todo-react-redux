@@ -1,8 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const IncompleteTodo = () => {
   const data = useSelector((state) => state.incompleteList);
+  const dispatch = useDispatch();
 
   return (
     <section className=" bg-white text-slate-800 rounded-md">
@@ -26,7 +27,16 @@ const IncompleteTodo = () => {
                 <tr>
                   <td>{index + 1}</td>
                   <td>
-                    <input type="checkbox" className="w-[30px]" />
+                    <input
+                      type="checkbox"
+                      className="w-[30px]"
+                      onChange={() => {
+                        dispatch({
+                          type: "MAKE_COMPLETED_TODO",
+                          payload: { id: todo.id },
+                        });
+                      }}
+                    />
                   </td>
                   <td className="text-lg">{todoText}</td>
                   <td className="text-lg">{todoDate}</td>

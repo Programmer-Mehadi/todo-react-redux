@@ -12,6 +12,17 @@ function reducer(state = initialState, action) {
     case "MAKE_INCOMPLETE_TODO":
       return state;
     case "MAKE_COMPLETED_TODO":
+      const completeTodo = state.incompleteList.filter(
+        (todo) => todo?.id === action?.payload?.id
+      );
+      const incompleteList = state.incompleteList.filter(
+        (todo) => todo?.id !== action?.payload?.id
+      );
+      const completedList = [...state.completedList, ...completeTodo];
+      state = {
+        incompleteList: [...incompleteList],
+        completedList: [...completedList],
+      };
       return state;
     default:
       return state;
